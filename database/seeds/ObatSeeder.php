@@ -180,7 +180,7 @@ class ObatSeeder extends Seeder
                 'faskes_tk2' => 1,
                 'faskes_tk3' => 1,
                 'kategori_id' => 3,
-                'gambar'=> ''
+                'gambar'=> 'Alopurinol.jpg'
             ],
             [
                 'nama_obat' => 'Alopurinol',
@@ -191,7 +191,7 @@ class ObatSeeder extends Seeder
                 'faskes_tk2' => 1,
                 'faskes_tk3' => 1,
                 'kategori_id' => 3,
-                'gambar'=> ''
+                'gambar'=> 'Alopurinol.jpg'
             ],
             [
                 'nama_obat' => 'Kolkisin',
@@ -202,7 +202,7 @@ class ObatSeeder extends Seeder
                 'faskes_tk2' => 1,
                 'faskes_tk3' => 1,
                 'kategori_id' => 3,
-                'gambar'=> ''
+                'gambar'=> 'Kolkisin.jpg'
             ],
             [
                 'nama_obat' => 'Probenesid',
@@ -225,7 +225,7 @@ class ObatSeeder extends Seeder
                 'faskes_tk2' => 1,
                 'faskes_tk3' => 1,
                 'kategori_id' => 4,
-                'gambar'=> ''
+                'gambar'=> 'Amitriptilin.jpg'
             ],
             [
                 'nama_obat' => 'Gabapentin',
@@ -236,7 +236,7 @@ class ObatSeeder extends Seeder
                 'faskes_tk2' => 1,
                 'faskes_tk3' => 1,
                 'kategori_id' => 4,
-                'gambar'=> ''
+                'gambar'=> 'Gabapentin.jpg'
             ],
             [
                 'nama_obat' => 'Gabapentin',
@@ -247,7 +247,7 @@ class ObatSeeder extends Seeder
                 'faskes_tk2' => 1,
                 'faskes_tk3' => 1,
                 'kategori_id' => 4,
-                'gambar'=> ''
+                'gambar'=> 'Gabapentin.jng'
             ],
             [
                 'nama_obat' => 'Karbamazepin',
@@ -258,7 +258,7 @@ class ObatSeeder extends Seeder
                 'faskes_tk2' => 1,
                 'faskes_tk3' => 1,
                 'kategori_id' => 4,
-                'gambar'=> ''
+                'gambar'=> 'Karbamazepin.jpg'
             ],
             [
                 'nama_obat' => 'Bupivakain heavy',
@@ -269,7 +269,7 @@ class ObatSeeder extends Seeder
                 'faskes_tk2' => 1,
                 'faskes_tk3' => 1,
                 'kategori_id' => 5,
-                'gambar'=> ''
+                'gambar'=> 'Bupivakain_heavy.jpg'
             ],
             [
                 'nama_obat' => 'Etil Klorida',
@@ -302,7 +302,7 @@ class ObatSeeder extends Seeder
                 'faskes_tk2' => 1,
                 'faskes_tk3' => 1,
                 'kategori_id' => 6,
-                'gambar'=> ''
+                'gambar'=> 'Deksmedetomidin.jpg'
             ],
             [
                 'nama_obat' => 'Halotan',
