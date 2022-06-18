@@ -6,10 +6,12 @@ Product
 
 
 
+
 @section('content')
 <br>
 
 <h4 class="text-center">Obat List</h4>
+<a href="#modalCreate" data-toggle='modal' class='btn btn-info'> Tambah Obat </a><br><br>
 <div class="table-responsive">
   <table id="myTable" class="table ">
     <thead>
@@ -88,6 +90,17 @@ Product
           <a class='btn btn-info' data-target="#show{{$item->id}}" data-toggle='modal'>
             Detail
           </a>
+          <a  href="#modalEdit" data-toggle="modal"  class='btn btn-warning btn-xs' onclick="getEditForm( {{$item->id}} )">
+            Edit
+          </a>
+
+          <div class="modal fade" id="modalEdit" tabindex="-1" role="basic" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content" id='modalContent'></div>
+              
+            </div>
+          </div>
+
           <div class="modal fade" id="show{{$item->id}}" tabindex="-1" role="basic" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -102,7 +115,65 @@ Product
       @endforeach
     </tbody>
   </table>
+
 </div>
+
+<div class="modal fade" id="modalCreate" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog">
+   <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Tambah Obat</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" method="POST" action="{{url('obat')}}">
+        @csrf
+          <div class="form-body">
+            <div class="form-group">
+              <label>Nama Obat</label>
+              <input type="text" class="form-control" id="name" name="name"><br>
+              <label for="formula">Formula</label>
+              <input type="text" class="form-control" id="formula" placeholder="Enter text" name="formula"><br>
+              <label for="restriction">restriction formula</label>
+              <input type="text" class="form-control" id="restriction" placeholder="Enter text" name="restriction"><br>
+              <label for="deskripsi">Deskripsi</label>
+              <input type="text" class="form-control" id="deskripsi" placeholder="Enter text" name="deskripsi"><br>
+              <label for="faskes1">Faskes_tk1</label>
+              <input type="text" class="form-control" id="faskes1" placeholder="Enter text" name="faskes1"><br>
+              <label for="faskes2">Faskes_tk2</label>
+              <input type="text" class="form-control" id="faskes2" placeholder="Enter text" name="faskes2"><br>
+              <label for="faskes3">Faskes_tk3</label>
+              <input type="text" class="form-control" id="faskes3" placeholder="Enter text" name="faskes3"><br>
+              <label for="kategori">Kategori_ID</label>
+              <select id="kategori_id" name="kategori_id">
+                <option value="">--Select One--</option>
+                @foreach ($kategori as $kat)
+                  <option value="{{$kat->id}}">{{$kat->name}}</option>
+                @endforeach                  
+              </select><br>
+              <label for="harga">Harga</label>
+              <input type="text" class="form-control" id="harga" placeholder="Harga" name="harga"><br>
+              <label for="gambar">Gambar</label>
+              <input type="file" class="form-control" id="gambar"  name="gambar"><br>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-info">Submit</button>
+            <a href="{{url('obat')}}" class="btn btn-default">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="modal fade" id="modalEdit" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modalContent">
+
+    </div>
+  </div>
+</div> -->
 
 
 @endsection
@@ -111,6 +182,22 @@ Product
 
 <script>
     $('#myTable').DataTable();
+
+  function getEditForm(id){
+    $.ajax({
+      type:'POST',
+      url:'{{ route("obat.getEditForm")}}',
+      data:{'_token':'<?php echo csrf_token() ?>',
+            'id':id
+          },
+      success: function(data){
+        // alert(data.msg);
+        $('#modalContent').html(data.msg)
+      }
+    });
+  }
+
+
 </script>
 
 @endsection

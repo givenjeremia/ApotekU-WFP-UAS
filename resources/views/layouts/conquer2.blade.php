@@ -176,7 +176,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 					<ul class="sub-menu">
 						<li>
-                            <a href="/kategori/create">
+                            <a href="{{route('kategori.create')}}">
                                 <i class="fa fa-plus-square"></i>
                                 Kategori Baru
                             </a>
@@ -295,6 +295,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.1/js/jquery.dataTables.js"></script> 
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
 {{-- <script type="text/javascript" src="{{ asset('DataTables/datatables.js') }}"></script> --}}
+<script type="text/javascript" charset="utf8" src="https://pagination.js.org/dist/2.1.5/pagination.js"></script> 
+
 
 
 <!-- END PAGE LEVEL SCRIPTS -->

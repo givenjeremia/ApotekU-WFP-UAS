@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Obat;
+use App\Kategori;
 use Illuminate\Http\Request;
 
 class ObatController extends Controller
@@ -16,7 +17,8 @@ class ObatController extends Controller
     {
         //
         $list_data = Obat::all();
-        return view('obat.index',['data'=>$list_data]);
+        $kategori = Kategori::all();
+        return view('obat.index',['data'=>$list_data,'kategori'=>$kategori]);
 
     }
 
@@ -27,7 +29,8 @@ class ObatController extends Controller
      */
     public function create()
     {
-        //
+        $kategori = Kategori::all();
+        return view('obat.create' , ['kategori'=>$kategori] );
     }
 
     /**
@@ -70,9 +73,24 @@ class ObatController extends Controller
      * @param  \App\Obat  $obat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Obat $obat)
+    public function update(Request $request, $obat)
     {
-        //
+        $obat = Obat::find($obat);
+        $obat->nama_obat=$request->get('nama_obat');
+        $obat->formula=$request->get('formula');
+        $obat->restriction_formula=$request->get('restriction_formula');
+        $obat->deskripsi=$request->get('deskripsi');
+        $obat->harga=$request->get('harga');
+        $obat->gambar="Fentanil.jpg";
+
+        $obat->faskes_tk1 = !empty($request->get('faskes_tk1'))  ? 1 : 0; 
+        $obat->faskes_tk2 = !empty($request->get('faskes_tk2'))  ? 1 : 0; 
+        $obat->faskes_tk3 = !empty($request->get('faskes_tk3'))  ? 1 : 0; 
+        // $obat->gambar=$request->get('gambar');
+        $obat->kategori_id=$request->get('kategori_id');
+
+        $obat->save();
+        return redirect()->route('obat.index')->with('status','Data Obat telah terubah');
     }
 
     /**
@@ -84,5 +102,49 @@ class ObatController extends Controller
     public function destroy(Obat $obat)
     {
         //
+        
+    }
+    public function front_index(Request $request)
+    {
+        $list_data = Obat::paginate(8);
+        if ($request->ajax()) {
+            return view('frontend.page', ['obat'=>$list_data]);
+        }
+        return view('frontend.obat',['obat'=>$list_data]);
+    }
+    public function addToCart($id)
+    {
+        $product = Obat::find($id);
+        $cart = session()->get("cart");
+        if(!isset($cart[$id])){
+            $cart[$id] = [
+                "name" => $product->nama_obat,
+                "quantity" => 1,
+                "price" => $product->harga,
+                "photo" => $product->gambar
+            ];
+        }
+        else{
+            $cart[$id]["quantity"]++;
+        }
+        session()->put("cart", $cart);
+        return redirect()->back()->with("status","Obat added to cart successfully!");
+
+    }
+
+    public function cart()
+    {
+        return view("frontend.cart");
+    }
+
+    public function getEditForm(Request $request){
+        $id=$request->get('id');
+        $data= Obat::find($id);
+        $kategori = Kategori::all();
+        // dd($data);
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('obat.update',compact('data','kategori'))->render()
+        ),200);
     }
 }

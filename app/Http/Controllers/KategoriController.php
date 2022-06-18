@@ -27,7 +27,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view ('kategori.create');
     }
 
     /**
@@ -38,7 +38,10 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=new Kategori();
+        $data->name=$request->get('name');
+        $data->save();
+        return redirect()->route('kategori.index')->with('status', 'Kategori Baru Ditambahkan');
     }
 
     /**
@@ -70,9 +73,12 @@ class KategoriController extends Controller
      * @param  \App\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request, $kategori)
     {
-        //
+        $kategori = Kategori::find($kategori);
+        $kategori->name=$request->get('name');
+        $kategori->save();
+        return redirect()->route('kategori.index')->with('status','Nama Kategori telah terubah');
     }
 
     /**
@@ -84,5 +90,19 @@ class KategoriController extends Controller
     public function destroy(Kategori $kategori)
     {
         //
+    }
+
+    public function getEditForm(Request $request){
+        $id=$request->get('id');
+        $data=Kategori::find($id);
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('kategori.edit',compact('data'))->render()
+        ),200);
+    }
+    
+    public function miripIndex(){
+        $kategori = Kategori::all();
+        return view('obat.update',['kategori'=>$kategori]);
     }
 }
