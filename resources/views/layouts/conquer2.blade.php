@@ -161,8 +161,10 @@ License: You must have a valid license purchased only from themeforest(the above
 							<i class="fa fa-plus"></i>Obat Baru</a>
 						</li>
 						<li>
-							<a href="/obat">
-							<i class="fa fa-group"></i>Data Obat</a>
+							<a href="{{route('obat.index')}}">
+							<i class="fa fa-group"></i>
+							<span class="title">Data Obat</span>
+							</a>
 						</li>
 					</ul>
 				</li>
@@ -180,10 +182,10 @@ License: You must have a valid license purchased only from themeforest(the above
                             </a>
 						</li>
 						<li>
-                            <a href="/kategori">
-                                <i class="fa fa-history"></i>
-                                Daftar Kategori
-                            </a>
+							<a href="{{route('kategori.index')}}">
+							<i class="fa fa-group"></i>
+							<span class="title">Data Kategori</span>
+							</a>
 						</li>
 					</ul>
 				</li>
