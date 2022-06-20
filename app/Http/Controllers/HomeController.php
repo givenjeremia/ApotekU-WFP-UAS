@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users = Auth::user();
+        $transaksi = Transaksi::where('user_id',$users->id);
+        return view('home', compact('transaksi'));
     }
 }

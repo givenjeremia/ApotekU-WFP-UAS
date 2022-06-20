@@ -25,7 +25,7 @@ Route::middleware(['auth'])->group(function(){
 });
 
 Route::get('/', 'ObatController@front_index');
-Route::get('/add-to-cart/{id}', 'ObatController@addToCart');
+Route::get('/add-to-cart/{id}', 'ObatController@addToCart')->middleware('auth');
 Route::get('/cart', 'ObatController@cart');
 
 

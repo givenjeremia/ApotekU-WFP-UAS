@@ -91,10 +91,11 @@ License: You must have a valid license purchased only from themeforest(the above
 				</a>
 				<ul class="dropdown-menu">
 					<li>
-						<a href="extra_profile.html"><i class="fa fa-user"></i> My Profile</a>
+						<a href="extra_profile.html"><i class="fa fa-user"></i> {{ Auth::user()->name }}</a>
 					</li>
 					<li>
 						@if(Auth::user())
+						<!-- <a href="extra_profile.html"><i class="fa fa-user"></i> </a> -->
 						<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
 							@csrf
 							<input type="submit" class="btn btn-danger" value="Logout">

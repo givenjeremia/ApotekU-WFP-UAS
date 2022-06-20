@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', 'Products')
+@section('title', 'ApotekU')
 
 
 
@@ -9,7 +9,6 @@
     <div class="container products">
         <div id="divrow">
             @include('frontend.page')
-        
         </div>
     </div>
 

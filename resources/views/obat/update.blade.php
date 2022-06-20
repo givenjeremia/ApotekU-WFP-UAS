@@ -16,7 +16,7 @@
       <div class="form-group">
         <label>Formula</label>
         <input type="text" class="form-control" id="formula" name='formula' value='{{$data->formula}}'>
-      </div>
+      </div> 
 
       <div class="form-group">
         <label>Restriction Formula</label>
