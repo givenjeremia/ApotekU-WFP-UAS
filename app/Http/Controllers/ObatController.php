@@ -119,18 +119,28 @@ class ObatController extends Controller
         if(!isset($cart[$id])){
             $cart[$id] = [
                 "name" => $product->nama_obat,
-                "quantity" => 1,
-                "price" => $product->harga,
-                "photo" => $product->gambar
+                "form" => $product->formula,
+                "kuantitas" => 1,
+                "harga" => $product->harga,
+                "gambar" => $product->gambar
             ];
         }
         else{
-            $cart[$id]["quantity"]++;
+            $cart[$id]["kuantitas"]++;
         }
         session()->put("cart", $cart);
         return redirect()->back()->with("status","Obat added to cart successfully!");
 
     }
+
+    public function deleteItemCart($id)
+    {
+        $cart = session()->get("cart");
+        unset($cart[$id]);
+        session()->put("cart", $cart);
+        return redirect()->back()->with("status","Obat delete to cart successfully!");
+    }
+
 
     public function cart()
     {
@@ -146,5 +156,10 @@ class ObatController extends Controller
             'status'=>'oke',
             'msg'=>view('obat.update',compact('data','kategori'))->render()
         ),200);
+    }
+
+    public function awalan(){
+        $list_data = "halo";
+        return view('obat.awalan',['data'=>$list_data]);
     }
 }

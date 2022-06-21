@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Transaksi;
+use App\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -18,7 +20,8 @@ class TransaksiController extends Controller
     {
         //
         $users = Auth::user();
-        $transaksi = Transaksi::where('user_id',$users->id);
+        $transaksi = Transaksi::where('users_id',$users->id)->get();
+        // dd($transaksi);
         return view('frontend.riwayat', compact('transaksi'));
     }
 
@@ -91,27 +94,43 @@ class TransaksiController extends Controller
 
     public function submit_front()
     {
-        // $this->authorize('checkmember');
         $cart = session()->get('cart');
         $user = Auth::user();
 
         
-        $t = new Transaction;
+        $t = new Transaksi;
         $t->users_id = $user->id;
-        $t->transaction_date = Carbon::now()->toDatetimeString();
+        $t->tanggal_transaksi = Carbon::now()->toDatetimeString();
         $t->save();
-        $total_harga = $t->insertProduct($cart,$user);
+        $total_harga = $t->TambahObat($cart,$user);
         // dd($total_harga);
         $t->total = $total_harga;
         $t->save();
         session()->forget('cart');
-        return redirect('home');        
+        return redirect('/');        
     }
 
     public function form_submit_front()
     {
-        $this->authorize('checkmember');
         return view("frontend.checkout");
+    }
+
+    public function baru()
+    {   
+        $transaksi = Transaksi::all();
+        // dd($transaksi);
+        return view('transaksi.index', compact('transaksi'));
+    }
+
+    public function showAjax(Request $request){
+        $id = $request->get('id');
+        $data = Transaksi::find($id);
+        $dataUsers = User::find($data->users_id);
+        $pembeli = $dataUsers->name;
+        $total = $data->total;
+        return response()->json(array(
+            'msg'=> view('transaksi.showmodal',compact('data', 'pembeli','total'))->render()
+        ), 200);
     }
 
 }

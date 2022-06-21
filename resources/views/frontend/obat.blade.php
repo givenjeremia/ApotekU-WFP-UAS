@@ -6,6 +6,16 @@
 
 
 @section('content')
+
+    <form action="/obat/cari" method="GET">
+        <div class="input-group">
+            <input class="form-control border-end-0 border rounded-pill m-2" type="text" placeholder="Cari Obat Dengan Nama .." id="example-search-input">
+            <button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+	</form>
+    <br>
     <div class="container products">
         <div id="divrow">
             @include('frontend.page')

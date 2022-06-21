@@ -4,10 +4,7 @@
 
 @section('content')
 <h1>Riwayat Transaksi</h1>
-@php
-// dd($transaksi)
-@endphp
-@if (!empty($transaksi))
+@if (empty($transaksi))
     <h3>Belum Ada Transaksi Yang Di Lakukan </h3>
 @else
 <table id="cart" class="table table-hover table-condensed">

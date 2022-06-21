@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    ApotikU
+                    ApotekU
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -46,7 +46,13 @@
                             <li class="nav-item">
                             <a class="nav-link" href="/transaksi">{{ __('Riwayat') }}</a>
                             </li>
+                            @if (Auth::user()->role == "Admin")
+                            <li class="nav-item">
+                            <a class="nav-link" href="/admin">{{ __('Dashboard') }}</a>
+                            </li>   
+                            @endif
                         @endif
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -92,7 +98,7 @@
                 $quantity_barang = 0;
                 if(session('cart')){
                 foreach(session('cart') as $id => $details){
-                $total += $details['price'] * $details['quantity'];
+                $total += $details['harga'] * $details['kuantitas'];
                 $quantity_barang++;
                 }
                 }
@@ -123,12 +129,12 @@
                         <div class="row cart-detail">
                             <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
                                 <img
-                                    src="{{ asset(($details['photo']  == '') ? 'img/no_image.png' : 'img/'.$details['photo'] ) }}">
+                                    src="{{ asset(($details['gambar']  == '') ? 'img/no_image.png' : 'img/'.$details['gambar'] ) }}">
                             </div>
                             <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
-                                <p>{{ $details['name'] }}</p>
-                                <span class="price text-info">Rp. {{ number_format($details['price'],2) }}</span> <span
-                                    class="count"> Quantity: {{ $details['quantity'] }}</span>
+                                <p>{{ $details['name'] }} - {{ $details['form'] }}</p>
+                                <span class="price text-info">Rp. {{ number_format($details['harga'],2) }}</span> <span
+                                    class="count"> Quantity: {{ $details['kuantitas'] }}</span>
                             </div>
                         </div>
                         @php

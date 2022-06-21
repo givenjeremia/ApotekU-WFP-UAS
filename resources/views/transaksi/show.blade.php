@@ -23,7 +23,7 @@
                     <tr>
                         <td data-th="obat">
                             <div class="row">
-                                <div class="col-sm-3 hidden-xs"><img src="{{ asset() }}" alt="..."
+                                <div class="col-sm-3 hidden-xs"><img src="{{ asset(($item->gambar == '') ? 'img/no_image.png' : 'img/'.$item->gambar ) }}" width="50%"  alt="..."
                                         class="img-responsive" /></div>
                                 <div class="col-sm-9">
                                     <h4 class="nomargin">{{ $item->nama_obat }}</h4>

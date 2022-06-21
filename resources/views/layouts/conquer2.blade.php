@@ -62,7 +62,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
             <a href="/">
-				<p>ApotikU - UAS</p>
+				<p>ApotekU - UAS</p>
                 {{-- <img src="{{ asset('conquer2/img/logo.png') }}" alt="logo"/> --}}
             </a>
         </div>
@@ -142,7 +142,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</form>
 				</li> --}}
 				<li class="start active ">
-					<a href="/">
+					<a href="/dashboard">
 					<i class="icon-home"></i>
 					<span class="title">
 						Dashboard
@@ -198,9 +198,28 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="/kategori_obat">Data Pembeli</a>
+							<a href="{{route('transaksi.baru')}}">
+							<i class="fa fa-group"></i>
+							<span class="title">Data Pembeli</span>
+							</a>
 						</li>
 					</ul>
+				</li>
+				<li >
+					<a href="javascript:;">
+					<i class=" icon-folder"></i>
+					<span class="title">Report</span>
+					<span class="arrow "></span>
+					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="{{route('report.terlaris')}}">Data obat terlaris</a>
+						</li>
+						<li>
+							<a href="{{route('report.terloyal')}}">Data customer terloyal</a>
+						</li>
+					</ul>
+					
 				</li>
 				{{-- <li class="last ">
 					<a href="" onclick="document.getElementById('formlogoutdash').submit();">

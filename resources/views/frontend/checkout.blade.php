@@ -21,23 +21,23 @@
         @if (session('cart'))
         @foreach (session('cart') as $id => $details)
         @php
-            $total += $details['price'] * $details['quantity'];
+            $total += $details['harga'] * $details['kuantitas'];
         @endphp
         <tr>
             <td data-th="Product">
                 <div class="row">
-                    <div class="col-sm-3 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+                    <div class="col-sm-3 hidden-xs"><img src="{{ asset(($details['gambar']  == '') ? 'img/no_image.png' : 'img/'.$details['gambar'] ) }} alt="..." class="img-responsive"/></div>
                     <div class="col-sm-9">
                         <h4 class="nomargin">{{ $details['name'] }}</h4>
                     </div>
                 </div>
             </td>
-            <td data-th="Price">{{ number_format($details['price'],2) }}</td>
+            <td data-th="Price">{{ number_format($details['harga'],2) }}</td>
             <td data-th="Quantity">
                 {{-- <input type="number" class="form-control text-center" value="1"> --}}
-                {{ $details['quantity'] }}
+                {{ $details['kuantitas'] }}
             </td>
-            <td data-th="Subtotal" class="text-center">Rp. {{ number_format($details['price'] * $details['quantity'],2) }}</td>
+            <td data-th="Subtotal" class="text-center">Rp. {{ number_format($details['harga'] * $details['kuantitas'],2) }}</td>
             {{-- <td class="actions" data-th="">
                 <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
                 <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>

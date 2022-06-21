@@ -13,4 +13,8 @@ class Obat extends Model
         return $this->belongsTo('App\Kategori','kategori_id');
     }
 
+    public function transaksi(){
+        return $this->belongsToMany('App\Transaksi','obat_transaksi','transaksi_id','obat_id')->withPivot('kuantitas','harga');
+    }
+
 }
