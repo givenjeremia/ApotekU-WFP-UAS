@@ -101,8 +101,4 @@ class KategoriController extends Controller
         ),200);
     }
     
-    public function miripIndex(){
-        $kategori = Kategori::all();
-        return view('obat.update',['kategori'=>$kategori]);
-    }
 }
