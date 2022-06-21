@@ -15,6 +15,5 @@
 
     @endforeach
 
+        {!! $obat->render() !!}
 </div>
-
-{!! $obat->render() !!}

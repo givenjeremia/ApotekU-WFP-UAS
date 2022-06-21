@@ -106,7 +106,10 @@ class ObatController extends Controller
     }
     public function front_index(Request $request)
     {
-        $list_data = Obat::paginate(8);
+        $cari = !empty($request->get('cari'))  ? $request->get('cari') : session()->get("cari"); 
+
+        session()->put('cari',$cari);
+        $list_data = Obat::where('nama_obat', 'LIKE', '%'.session()->get("cari").'%')->paginate(8);
         if ($request->ajax()) {
             return view('frontend.page', ['obat'=>$list_data]);
         }

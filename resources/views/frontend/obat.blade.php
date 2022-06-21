@@ -7,25 +7,32 @@
 
 @section('content')
 
-    <form action="/obat/cari" method="GET">
-        <div class="input-group">
-            <input class="form-control border-end-0 border rounded-pill m-2" type="text" placeholder="Cari Obat Dengan Nama .." id="example-search-input">
-            <button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill" type="submit">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
-	</form>
-    <br>
-    <div class="container products">
-        <div id="divrow">
-            @include('frontend.page')
-        </div>
+<div class="input-group">
+    <input class="form-control border-end-0 border rounded-pill m-2" type="text"
+        placeholder="Cari Obat Dengan Nama .." id="example-search-input">
+</div>
+<br>
+<p id="query"></p>
+<div class="container products">
+    <div id="divrow">
+        @include('frontend.page')
     </div>
+</div>
 
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
+    $("#example-search-input").keyup(function() {
+        $.ajax({
+            type:'GET',
+            url:'{{route("obat.cari")}}',
+            data:'_token= <?php echo csrf_token() ?> &cari='+this.value,
+            success: function(data){
+                $('#load').html(data)
+            }
+        });
+    });
     $(function () {
         $('body').on('click', '.pagination a', function (e) {
             e.preventDefault();
@@ -47,5 +54,3 @@
     });
 </script>
 @endsection
-
-

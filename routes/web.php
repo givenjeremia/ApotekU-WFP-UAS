@@ -19,7 +19,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@dashboardPage')->name('home');
 
 
-Route::get('/', 'ObatController@front_index');
+Route::get('/', 'ObatController@front_index')->name('obat.cari');;
 
 Route::middleware(['can:member-permission'])->group(function(){
     Route::get('/add-to-cart/{id}', 'ObatController@addToCart');
