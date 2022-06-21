@@ -29,4 +29,17 @@ class HomeController extends Controller
         $transaksi = Transaksi::where('user_id',$users->id);
         return view('home', compact('transaksi'));
     }
+
+    public function dashboardPage (Request $request)
+    {
+        $user = $request->user();
+        if ($user->hasRole('Admin'))
+        {
+            return redirect ('/obat');
+        }
+        else if ($user->hasRole('Pembeli'))
+        {
+            return redirect ('/');
+        }
+    }
 }

@@ -3,7 +3,7 @@
 
     <div class="col-xs-18 col-sm-6 col-md-3">
         <div class="thumbnail">
-            <img src="{{ asset(($item->image == '') ? 'img/no_image.png' : 'img/'.$item->image ) }}" alt="" width="25%">
+            <img src="{{ asset(($item->gambar == '') ? 'img/no_image.png' : 'img/'.$item->gambar ) }}" alt="" width="25%">
             <div class="caption">
                 <h4>{{ $item->nama_obat}} <span>{{ $item->formula }}</span> </h4>
                 <p>{{ Str::limit(strtolower($item->deskripsi), 50, '...') }}</p>

@@ -38,5 +38,5 @@ Route::post('/obat/getEditForm','ObatController@getEditForm')->name('obat.getEdi
 
 Route::get('/miripIndex','KategoriController@miripIndex')->name('miripIndex');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@dashboardPage')->name('home');
 
