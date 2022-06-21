@@ -13,30 +13,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.conquer2');
-});
 
 Auth::routes();
+Route::get('/', 'ObatController@front_index');
+
+Route::get('/home', 'HomeController@dashboardPage')->name('home');
 
 Route::middleware(['auth'])->group(function(){
-
+    Route::get('/add-to-cart/{id}', 'ObatController@addToCart')->middleware('auth');
+    Route::get('/cart', 'ObatController@cart');
+    Route::resource('/transaksi', TransaksiController::class);
 
 });
 
-Route::get('/', 'ObatController@front_index');
-Route::get('/add-to-cart/{id}', 'ObatController@addToCart')->middleware('auth');
-Route::get('/cart', 'ObatController@cart');
+Route::middleware(['can:admin-permission'])->group(function(){
+    Route::get('/admin', function () {
+        return view('layouts.conquer2');
+    });
+    
+    Route::resource('/admin/obat', ObatController::class);
+    Route::resource('/admin/kategori', KategoriController::class);
+    
+    Route::post('/admin/kategori/getEditForm','KategoriController@getEditForm')->name('kategori.getEditForm');
+    Route::post('/admin/obat/getEditForm','ObatController@getEditForm')->name('obat.getEditForm');
+    
+    Route::get('/admin/miripIndex','KategoriController@miripIndex')->name('miripIndex');
+});
 
 
 
-Route::resource('/obat', ObatController::class);
-Route::resource('/kategori', KategoriController::class);
 
-Route::post('/kategori/getEditForm','KategoriController@getEditForm')->name('kategori.getEditForm');
-Route::post('/obat/getEditForm','ObatController@getEditForm')->name('obat.getEditForm');
-
-Route::get('/miripIndex','KategoriController@miripIndex')->name('miripIndex');
-
-Route::get('/home', 'HomeController@dashboardPage')->name('home');
 

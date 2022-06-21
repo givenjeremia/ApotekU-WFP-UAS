@@ -25,9 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = Auth::user();
-        $transaksi = Transaksi::where('user_id',$users->id);
-        return view('home', compact('transaksi'));
+        
     }
 
     public function dashboardPage (Request $request)
@@ -35,7 +33,7 @@ class HomeController extends Controller
         $user = $request->user();
         if ($user->hasRole('Admin'))
         {
-            return redirect ('/obat');
+            return redirect ('/admin');
         }
         else if ($user->hasRole('Pembeli'))
         {

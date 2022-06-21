@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class TransaksiController extends Controller
 {
@@ -15,6 +17,9 @@ class TransaksiController extends Controller
     public function index()
     {
         //
+        $users = Auth::user();
+        $transaksi = Transaksi::where('user_id',$users->id);
+        return view('frontend.riwayat', compact('transaksi'));
     }
 
     /**
