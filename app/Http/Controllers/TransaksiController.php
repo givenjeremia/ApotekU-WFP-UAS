@@ -88,4 +88,30 @@ class TransaksiController extends Controller
     {
         //
     }
+
+    public function submit_front()
+    {
+        // $this->authorize('checkmember');
+        $cart = session()->get('cart');
+        $user = Auth::user();
+
+        
+        $t = new Transaction;
+        $t->users_id = $user->id;
+        $t->transaction_date = Carbon::now()->toDatetimeString();
+        $t->save();
+        $total_harga = $t->insertProduct($cart,$user);
+        // dd($total_harga);
+        $t->total = $total_harga;
+        $t->save();
+        session()->forget('cart');
+        return redirect('home');        
+    }
+
+    public function form_submit_front()
+    {
+        $this->authorize('checkmember');
+        return view("frontend.checkout");
+    }
+
 }

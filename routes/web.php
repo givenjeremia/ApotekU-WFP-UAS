@@ -20,7 +20,7 @@ Route::get('/', 'ObatController@front_index');
 Route::get('/home', 'HomeController@dashboardPage')->name('home');
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/add-to-cart/{id}', 'ObatController@addToCart')->middleware('auth');
+    Route::get('/add-to-cart/{id}', 'ObatController@addToCart');
     Route::get('/cart', 'ObatController@cart');
     Route::resource('/transaksi', TransaksiController::class);
 
@@ -39,6 +39,7 @@ Route::middleware(['can:admin-permission'])->group(function(){
     
     Route::get('/admin/miripIndex','KategoriController@miripIndex')->name('miripIndex');
 });
+
 
 
 

@@ -4,10 +4,9 @@ namespace App\Policies;
 
 use App\User;
 use Illuminate\Auth\Access\Response;
-
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ObatPolicy
+class PembeliPolicy
 {
     use HandlesAuthorization;
 
@@ -20,8 +19,7 @@ class ObatPolicy
     {
         //
     }
-
     public function access(User $user){
-        return ($user->role == "Admin" ? Response::allow() : Response::deny("You must be a super administrator")); 
+        return ($user->role == "Pembeli" ? Response::allow() : Response::deny("You must be a Member")); 
     }
 }
