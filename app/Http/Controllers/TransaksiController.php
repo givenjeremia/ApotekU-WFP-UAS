@@ -127,9 +127,10 @@ class TransaksiController extends Controller
         $data = Transaksi::find($id);
         $dataUsers = User::find($data->users_id);
         $pembeli = $dataUsers->name;
-        $total = $data->total;
+        $totals = $data->total;
+        // dd($data->obat);
         return response()->json(array(
-            'msg'=> view('transaksi.showmodal',compact('data', 'pembeli','total'))->render()
+            'msg'=> view('transaksi.showmodal',compact('data', 'pembeli','totals'))->render()
         ), 200);
     }
 

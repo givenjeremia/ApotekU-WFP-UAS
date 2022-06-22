@@ -24,4 +24,8 @@ class Transaksi extends Model
         return $total;
     }
 
+    public function user(){
+        return $this->belongsTo('App\User','users_id');
+    }
+
 }

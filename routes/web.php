@@ -33,9 +33,10 @@ Route::middleware(['can:member-permission'])->group(function(){
 
 
 Route::middleware(['can:admin-permission'])->group(function(){
-    Route::get('/admin', function () {
-        return view('layouts.conquer2');
-    }); 
+    Route::get('/admin', 'ObatController@awalan'); 
+    // Route::get('/admin', function () {
+    //     return view('layouts.conquer2');
+    // }); 
     Route::resource('/admin/obat', ObatController::class);
     Route::resource('/admin/kategori', KategoriController::class);
     

@@ -25,7 +25,7 @@
       
 
         <td>{{$li -> id}}</td>
-        <td>{{$li -> users_id}}</td>
+        <td>{{$li -> user -> name}}</td>
         <td>{{$li -> tanggal_transaksi}}</td>
         
         <td>
