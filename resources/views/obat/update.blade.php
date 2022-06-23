@@ -1,5 +1,5 @@
-<h2>Edit Obat</h2> <br>
-<form role="form" method="POST" action="{{url('obat/'.$data->id)}}">
+
+<form role="form" method="POST" action="{{ route('obat.update', $data->id) }}" enctype="multipart/form-data" >
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
     <h4 class="modal-title">Edit Obat</h4>
@@ -55,6 +55,9 @@
                 </div>
 
       <div class="form-group">
+
+      <label for="gambar">Gambar</label>
+      <input type="file" class="form-control" id="gambar"  name="gambar"><br>
 
         <label for="kategori">Kategori ID</label>
           <select class="form-control" name="kategori_id" id="kategori_id">

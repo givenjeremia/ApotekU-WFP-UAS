@@ -87,12 +87,14 @@ Product
         </td>
         <td>{{ number_format($item->harga, 2) }}</td>
         <td>
-          <a class='btn btn-info' data-target="#show{{$item->id}}" data-toggle='modal'>
-            Detail
-          </a>
           <a  href="#modalEdit" data-toggle="modal"  class='btn btn-warning btn-xs' onclick="getEditForm( {{$item->id}} )">
             Edit
           </a>
+          <form method='POST' action="{{ route('obat.destroy',$item->id) }}">
+            @csrf
+            @method('DELETE')
+            <input type="submit" value="delete" class='btn btn-danger btn-xs' onclick="if(!confirm('are you sure to delete this record ?')) return false;">
+          </form>
 
           <div class="modal fade" id="modalEdit" tabindex="-1" role="basic" aria-hidden="true">
             <div class="modal-dialog">
@@ -126,7 +128,7 @@ Product
         <h4 class="modal-title">Tambah Obat</h4>
       </div>
       <div class="modal-body">
-        <form role="form" method="POST" action="{{url('obat')}}">
+        <form role="form" method="POST" action="{{route('obat.store')}}" enctype="multipart/form-data">
         @csrf
           <div class="form-body">
             <div class="form-group">
@@ -138,12 +140,28 @@ Product
               <input type="text" class="form-control" id="restriction" placeholder="Enter text" name="restriction"><br>
               <label for="deskripsi">Deskripsi</label>
               <input type="text" class="form-control" id="deskripsi" placeholder="Enter text" name="deskripsi"><br>
-              <label for="faskes1">Faskes_tk1</label>
-              <input type="text" class="form-control" id="faskes1" placeholder="Enter text" name="faskes1"><br>
-              <label for="faskes2">Faskes_tk2</label>
-              <input type="text" class="form-control" id="faskes2" placeholder="Enter text" name="faskes2"><br>
-              <label for="faskes3">Faskes_tk3</label>
-              <input type="text" class="form-control" id="faskes3" placeholder="Enter text" name="faskes3"><br>
+              <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Faskes TK1 </label>
+                            <input type="checkbox" name="faskes_tk1" id="faskes_tk1" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Faskes TK2 </label>
+                            <input type="checkbox" name="faskes_tk2" id="faskes_tk2" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Faskes TK3</label>
+                            <input type="checkbox" name="faskes_tk3" id="faskes_tk3" class="form-control" >
+                        </div>
+                    </div>
+                </div>
+
+      <div class="form-group">
               <label for="kategori">Kategori_ID</label>
               <select id="kategori_id" name="kategori_id">
                 <option value="">--Select One--</option>

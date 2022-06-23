@@ -1,7 +1,5 @@
 
-<h2>Edit Kategori</h2> <br>
-
-<form role="form" method="POST" action="{{url('kategori/'.$data->id)}}">
+<form role="form" method="POST" action="{{ route('kategori.update', $data->id) }}">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
     <h4 class="modal-title">Edit Kategori</h4>

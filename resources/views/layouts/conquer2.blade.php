@@ -157,10 +157,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
-						<li>
-							<a href="/obat/create">
-							<i class="fa fa-plus"></i>Obat Baru</a>
-						</li>
+						
 						<li>
 							<a href="{{route('obat.index')}}">
 							<i class="fa fa-group"></i>
@@ -176,12 +173,6 @@ License: You must have a valid license purchased only from themeforest(the above
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
-						<li>
-                            <a href="{{route('kategori.create')}}">
-                                <i class="fa fa-plus-square"></i>
-                                Kategori Baru
-                            </a>
-						</li>
 						<li>
 							<a href="{{route('kategori.index')}}">
 							<i class="fa fa-group"></i>

@@ -41,7 +41,26 @@ class ObatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $obat= new Obat();
+        $obat->nama_obat=$request->get('name');
+        $obat->formula=$request->get('formula');
+        $obat->restriction_formula=$request->get('restriction');
+        $obat->deskripsi=$request->get('deskripsi');
+        $obat->faskes_tk1 = !empty($request->get('faskes_tk1'))  ? 1 : 0; 
+        $obat->faskes_tk2 = !empty($request->get('faskes_tk2'))  ? 1 : 0; 
+        $obat->faskes_tk3 = !empty($request->get('faskes_tk3'))  ? 1 : 0; 
+        $obat->kategori_id=$request->get('kategori_id');
+        $obat->harga=$request->get('harga');
+        
+        $file = $request->file('gambar');
+        $img_folder = 'img';
+        $img_file = $file->getClientOriginalName();
+        $file->move($img_folder, $img_file);
+
+        $obat->gambar =$img_file;
+        $obat->save();
+        return redirect()->route('obat.index')->with('status','Obat berhasil ditambahkan');
+        
     }
 
     /**
@@ -61,7 +80,7 @@ class ObatController extends Controller
      * @param  \App\Obat  $obat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Obat $obat)
+    public function edit($obat)
     {
         //
     }
@@ -80,13 +99,20 @@ class ObatController extends Controller
         $obat->formula=$request->get('formula');
         $obat->restriction_formula=$request->get('restriction_formula');
         $obat->deskripsi=$request->get('deskripsi');
-        $obat->harga=$request->get('harga');
-        $obat->gambar="Fentanil.jpg";
-
         $obat->faskes_tk1 = !empty($request->get('faskes_tk1'))  ? 1 : 0; 
         $obat->faskes_tk2 = !empty($request->get('faskes_tk2'))  ? 1 : 0; 
         $obat->faskes_tk3 = !empty($request->get('faskes_tk3'))  ? 1 : 0; 
+        $obat->harga=$request->get('harga');
+        // $obat->gambar="Fentanil.jpg";
         // $obat->gambar=$request->get('gambar');
+
+        $file = $request->file('gambar');
+        $img_folder = 'img';
+        $img_file = $file->getClientOriginalName();
+        $file->move($img_folder, $img_file);
+
+        $obat->gambar =$img_file;
+
         $obat->kategori_id=$request->get('kategori_id');
 
         $obat->save();
@@ -99,9 +125,17 @@ class ObatController extends Controller
      * @param  \App\Obat  $obat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Obat $obat)
+    public function destroy($obat)
     {
-        //
+        $obat = obat::find($obat);
+        try{
+            $obat->delete();
+            return redirect()->route('obat.index')->with('status','Data Obat berhasil di hapus');
+        }catch (\PDOException $e) {
+            $msg="Data Gagal dihapus. Pastikan data child sudah hilang atau tidak berhubungan";
+
+            return redirect()->route('obat.index')-with('error',$msg);
+        }
         
     }
     public function front_index(Request $request)

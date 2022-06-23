@@ -41,6 +41,39 @@ Kategori
           <a href="#modalEdit" data-toggle='modal' class='btn btn-warning btn-xs' onclick="getEditForm({{$item->id}})">
             Edit
           </a>
+          
+          <form method='POST' action="{{ route('kategori.destroy',$item->id) }}">
+            @csrf
+            @method('DELETE')
+            <input type="submit" value="delete" class='btn btn-danger btn-xs' onclick="if(!confirm('are you sure to delete this record ?')) return false;">
+          </form>
+        
+
+          <div class="modal fade" id="modalCreate" tabindex="-1" role="basic" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                  <h4>Tambah Kategori</h4>
+                </div>
+                <div class="modal-body">
+                  <form role="form" method="POST" action="{{url('admin/kategori')}}">
+                    @csrf
+                    <div class="form-body">
+                      <div class="form-group">
+                        <label>Nama Kategori</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                      </div>
+                    </div>
+                    <div class="form-actions">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                    <a href="{{url('admin/kategori')}}" class="btn btn-default">Cancel</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
           <div class="modal fade" id="modalEdit" tabindex="-1" role="basic" aria-hidden="true">
@@ -49,13 +82,8 @@ Kategori
             </div>
           </div>
 
-          {{-- <a href="{{ route('kategori_obat.edit', $item->id) }}" class="btn btn-success">UPDATE</a>
-          <form action="{{ route('kategori_obat.destroy', $item->id) }}" method="post">
-            @csrf
-            @method('delete')
-            <button type="submit" class="btn btn-danger">DELETE</button>
-          </form> --}}
-          kk
+          
+          
         </td>
       </tr>
       @php

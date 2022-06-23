@@ -7,7 +7,7 @@ Product
 @section('content')
 
 <div class="container">
-  <h2>Daftar Obat Terlaris</h2>
+  <h2>Daftar Customer Terloyal</h2>
   <br>       
   <table class="table table-hover">
     <thead>

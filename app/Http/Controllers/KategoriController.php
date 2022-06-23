@@ -87,9 +87,17 @@ class KategoriController extends Controller
      * @param  \App\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kategori $kategori)
+    public function destroy($kategori)
     {
-        //
+        $kategori = Kategori::find($kategori);
+        try{
+            $kategori->delete();
+            return redirect()->route('kategori.index')->with('status','Data kategori berhasil di hapus');
+        }catch (\PDOException $e) {
+            $msg="Data Gagal dihapus. Pastikan data child sudah hilang atau tidak berhubungan";
+
+            return redirect()->route('kategori.index')-with('error',$msg);
+        }
     }
 
     public function getEditForm(Request $request){
